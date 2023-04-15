@@ -1,0 +1,21 @@
+import Vue from 'vue'
+import App from './App.vue'
+import './registerServiceWorker'
+import router from './router'
+import store from './store'
+import vuetify from './plugins/vuetify'
+import { auth, onAuthStateChanged } from './firebase'
+
+
+Vue.config.productionTip = false
+
+onAuthStateChanged(auth, (user) => {
+  console.log(user);
+  new Vue({
+    router,
+    store,
+    vuetify,
+    render: h => h(App)
+  }).$mount('#app')
+});
+
